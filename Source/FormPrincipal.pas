@@ -409,7 +409,8 @@ begin
   if FileExists(synFile) then begin
     hlAssem.LoadFromFile(synFile);
   end else begin
-    MsgErr(MSG_SYNFIL_NOF, [synFile]);
+    if MSG_SYNFIL_NOF<>'' then
+      MsgErr(MSG_SYNFIL_NOF, [synFile]);
   end;
 end;
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
@@ -487,6 +488,7 @@ begin
   //Carga último archivo
   if Config.LoadLast then fraEditView1.LoadListFiles(Config.filesClosed);
   acToolSelPIC16Execute(self);  //Fija compilador por defecto
+  Timer1.Enabled:=True;
 end;
 procedure TfrmPrincipal.DoSelectSample(Sender: TObject);
 //Se ha seleccionado un archivo de ejemplo.
